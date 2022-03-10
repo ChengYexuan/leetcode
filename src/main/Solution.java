@@ -91,18 +91,4 @@ public class Solution{
         if(dp[amount] == amount+1) return -1;
         return dp[amount];
     }
-
-    public int hammingDistance(int x, int y) {
-        int max = Math.max(x, y);
-        int count = 0;
-        while((max = max/2) != 0){
-            Integer a = x%2;
-            Integer b = y%2;
-            if(!a.equals(b))
-                count ++;
-            x = x/2;
-            y = y/2;
-        }
-        return count;
-    }
 }

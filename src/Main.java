@@ -1,14 +1,14 @@
-package main;
-
-import garph.GraphSolution;
-import main.Solution;
+import tree.Solution;
+import tree.Tree;
 
 public class Main {
     public static void main(String[] args) {
 
 
         Solution s = new Solution();
-        System.out.println((s.hammingDistance(1, 4)));
+        String[] tree = {"1", "2", "3", "4", "null", "null", "5"};
+        Tree t = new Tree(tree);
+        System.out.println(s.levelOrder(t.getRoot()));
 //        GraphSolution gh = new GraphSolution();
 //        int[] a = {10, 15, 20};
 //        int[][] a = gh.create(6,6);
