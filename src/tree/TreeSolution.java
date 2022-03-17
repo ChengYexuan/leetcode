@@ -2,7 +2,12 @@ package tree;
 
 import java.util.*;
 
-public class Solution {
+public class TreeSolution {
+    /**
+     * 层序
+     * @param root 二叉树根节点
+     * @return 二叉树按照层序得到的二维数组
+     */
     public List<List<Integer>> levelOrder(TreeNode root) {
         Queue<TreeNode> q = new LinkedList<>();
         List<List<Integer>> result = new ArrayList<>();
@@ -29,10 +34,11 @@ public class Solution {
         return result;
     }
 
-    // 逆波兰表达式主要有以下两个优点：
-    //
-    // 去掉括号后表达式无歧义，不需要阔话也可以依据次序计算出正确结果。
-    // 适合用栈操作运算：遇到数字则入栈；遇到算符则取出栈顶两个数字进行计算，并将结果压入栈中。
+    /**
+     * 逆波兰表达式的优点：去掉括号后表达式无歧义，适合用栈操作运算：遇到数字则入栈；遇到算符则取出栈顶两个数字进行计算，并将结果压入栈中。
+     * @param tokens 后缀表达式
+     * @return calculation of expression
+     */
     public int evalRPN(String[] tokens) {
         Stack<Integer> s = new Stack<>();
         for (String token : tokens) {

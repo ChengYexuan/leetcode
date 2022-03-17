@@ -5,6 +5,10 @@ public class TreeNode {
     TreeNode left;
     TreeNode right;
 
+    TreeNode() {
+        this(0);
+    }
+
     TreeNode(int val) {
         this.val = val;
         this.left = null;

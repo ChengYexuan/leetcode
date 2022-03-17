@@ -1,31 +1,13 @@
 package tree;
 
-//import lombok.AccessLevel;
-//import lombok.Getter;
-//import lombok.Setter;
-
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class Tree {
-//    @Getter
     private TreeNode root;
-
     public TreeNode getRoot() {
         return root;
     }
-
-    Tree() {
-        this.root = null;
-    }
-
-//    Tree(int[] suffix){
-//        Stack s = new Stack();
-//        for(int node: suffix){
-//            if(node)
-//            s.push()
-//        }
-//    }
 
     public Tree(String[] levelOrder) {
         Queue<TreeNode> q = new LinkedList<>();
