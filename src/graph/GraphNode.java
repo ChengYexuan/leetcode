@@ -3,21 +3,21 @@ package graph;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Node {
+public class GraphNode {
     public int val;
-    public List<Node> neighbors;
+    public List<GraphNode> neighbors;
 
-    public Node() {
+    public GraphNode() {
         val = 0;
         neighbors = new ArrayList<>();
     }
 
-    public Node(int _val) {
+    public GraphNode(int _val) {
         val = _val;
         neighbors = new ArrayList<>();
     }
 
-    public Node(int _val, ArrayList<Node> _neighbors) {
+    public GraphNode(int _val, ArrayList<GraphNode> _neighbors) {
         val = _val;
         neighbors = _neighbors;
     }

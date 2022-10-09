@@ -1,4 +1,4 @@
-package main;
+package solution;
 
 import java.util.*;
 
@@ -87,9 +87,10 @@ public class Solution {
 
     /**
      * Minimum delete. Always used in limited operation situation.
+     *
      * @param s1 text1
      * @param s2 text2
-     * @return minimum sum of deleted letter's ascii in order to make the two string the same
+     * @return minimum sum of deleted letter's ascii in order to make text1 and text2 the same
      */
     public int minimumDeleteSum(String s1, String s2) {
         int m = s1.length();
@@ -113,37 +114,37 @@ public class Solution {
         return dp[m][n];
     }
 
-    public int longestIncreasingPath(int[][] matrix){
+    public int longestIncreasingPath(int[][] matrix) {
         m = matrix.length;
         n = matrix[0].length;
         int[][] dp = new int[m][n];
-        for(int i = 0; i < m; i++){
-            for(int j = 0; j < n; j++){
-                if(dp[i][j] == 0){
-                    dp[i][j] = travesal(i, j, dp, matrix);
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (dp[i][j] == 0) {
+                    dp[i][j] = traversal(i, j, dp, matrix);
                 }
             }
         }
         int max = 0;
-        for(int i = 0; i < m; i++){
-            for(int j = 0; j < n; j++){
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
                 max = Math.max(max, dp[i][j]);
             }
         }
         return max;
     }
 
-    private int travesal(int i, int j, int[][] dp, int[][] matrix){
+    private int traversal(int i, int j, int[][] dp, int[][] matrix) {
         int max = 1;
-        for(int k = 0; k < 4; k++){
+        for (int k = 0; k < 4; k++) {
             int x = i + dx[k];
             int y = j + dy[k];
-            if(x >= 0 && x < m && y >= 0 && y < n){
-                if(matrix[x][y] > matrix[i][j]){
-                    if(dp[x][y] != 0){
+            if (x >= 0 && x < m && y >= 0 && y < n) {
+                if (matrix[x][y] > matrix[i][j]) {
+                    if (dp[x][y] != 0) {
                         max = Math.max(max, dp[x][y] + 1);
                     } else {
-                        max = Math.max(max, travesal(x, y, dp, matrix) + 1);
+                        max = Math.max(max, traversal(x, y, dp, matrix) + 1);
                     }
                 }
             }
@@ -168,5 +169,91 @@ public class Solution {
         }
         List<String> list = new ArrayList<String>(start);
         return list;
+    }
+
+    public int superEggDrop(int k, int n) {
+        int[][] dp = new int[k + 1][n + 1];
+        for (int i = 1; i <= n; i++) {
+            dp[1][i] = i;
+        }
+        for (int i = 2; i <= k; i++) {
+            for (int j = 0; j <= n; j++) {
+                if (j <= Math.pow(2, i - 1)) {
+                    dp[i][j] = dp[i - 1][j];
+                    continue;
+                }
+                dp[i][j] = dp[i - 1][j];
+                for (int s = 1; s <= j; s++) {
+                    dp[i][j] = Math.min(dp[i][j], Math.max(dp[i - 1][s - 1], dp[i][j - s]) + 1);
+                }
+            }
+        }
+        return dp[k][n];
+    }
+
+    public int findKthLargest(int[] nums, int k) {
+        buildMaxHeap(nums);
+        int ans = 0;
+        int heapSize = nums.length;
+        for (int i = 0; i < k; i++) {
+            ans = deleteMax(nums, heapSize--);
+        }
+        return ans;
+    }
+
+    /**
+     * Heapify, always execute as the first step of heap sorting.
+     *
+     * @param arr input as an unsorted array.
+     */
+    private void buildMaxHeap(int[] arr) {
+        // 从最后一个非叶子结点开始调整大顶堆，最后一个非叶子结点的下标就是 arr.length / 2 - 1
+        for (int i = arr.length / 2 - 1; i >= 0; i--) {
+            percolateDown(arr, i, arr.length);
+        }
+    }
+
+    private void percolateDown(int[] arr, int index, int heapSize) {
+        int target = arr[index];
+        int child;
+        for (; index <= heapSize / 2 - 1; index = child) {
+            child = index * 2 + 1;
+            // find the maximal child
+            if (child != heapSize - 1 && arr[child + 1] > arr[child]) {
+                child++;
+            }
+            if (target < arr[child]) {
+                // child is bigger and so move up
+                arr[index] = arr[child];
+            } else break;
+        }
+        arr[index] = target;
+    }
+
+    /**
+     * Delete the top of maxHeap and move it to the tail.
+     *
+     * @param arr
+     * @param heapSize the size of heap
+     * @return
+     */
+    private int deleteMax(int[] arr, int heapSize) {
+        int max = arr[0];
+        int last = arr[heapSize - 1];
+        int child, index = 0;
+        for (; index <= heapSize / 2 - 1; index = child) {
+            child = index * 2 + 1;
+            // find the maximal child
+            if (child != heapSize - 1 && arr[child + 1] > arr[child]) {
+                child++;
+            }
+            if (last < arr[child]) {
+                // child is bigger and so move up
+                arr[index] = arr[child];
+            } else break;
+        }
+        arr[index] = last;
+        arr[heapSize - 1] = max;
+        return max;
     }
 }

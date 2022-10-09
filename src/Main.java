@@ -1,39 +1,25 @@
-import graph.Graph;
-import graph.GraphSolution;
-import main.LFUCache;
-import main.LRUCache;
-import main.Solution;
-import tree.Node;
-import tree.Tree;
-import tree.TreeNode;
-import tree.TreeSolution;
+import list.ListNode;
+import list.ListSolution;
+import solution.Solution;
+import test.ChildClass;
+import test.SuperClass;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Main {
+    public static void main(String[] args) {
 
-
-
-    public static void main(String[] args){
 
         // Array related test
         Solution s = new Solution();
-/*        List<Integer> list = Arrays.asList(4, 1, 2, 3, 5, 7, 4, 2, 10);
+        List<Integer> list = Arrays.asList(4, 1, 2, 3, 5, 7, 4, 2, 10);
         Collections.sort(list);
         String s1 = "bbbab";
         String s2 = "eat";
-        System.out.println(s.longestPalindromeSubseq(s1));*/
         int[][] matrix = {{9, 9, 4}, {6, 6, 8}, {2, 1, 1}};
-        System.out.println(s.longestIncreasingPath(matrix));;
-
-
-
-
+        System.out.println(s.findKthLargest(new int[]{-3,-2,3,1,2,4,5,5,6}, 7));
 
         // LRU Cache test or LFU Cache test
 /*        Scanner sc = new Scanner(System.in);
@@ -81,33 +67,19 @@ public class Main {
         // hashcode and equal test
 /*        Integer q = 2;
         Integer p = 2;
-        String a = q.hashCode() == p.hashCode() ? "equal": "not equal";
-        String b = q==p ? "equal": "not equal";
-        String c = q.equals(p) ? "equal": "not equal";
-        String d = System.identityHashCode(q) == System.identityHashCode(p) ? "equal": "not equal";
-        System.out.println(a+'\n'+b+'\n'+c+'\n'+d);;*/
+        String a = q.hashCode() == p.hashCode() ? "equal" : "not equal";
+        String b = q == p ? "equal" : "not equal";
+        String c = q.equals(p) ? "equal" : "not equal";
+        String d = System.identityHashCode(q) == System.identityHashCode(p) ? "equal" : "not equal";
+        System.out.println(a + '\n' + b + '\n' + c + '\n' + d);*/
 
-        superEggDrop(3,25);
-    }
-    public static int superEggDrop(int k, int n) {
-        int[][] dp = new int[k+1][n+1];
-        for(int i = 1; i <= n; i++){
-            dp[1][i] = i;
-        }
-        for(int i = 2; i <= k; i++){
-            for(int j = 0; j <= n; j++){
-                if(j <= Math.pow(2, i-1)){
-                    dp[i][j] = dp[i-1][j];
-                    continue;
-                }
-                dp[i][j] = dp[i-1][j];
-                for(int s = 1; s <= j; s++){
-                    dp[i][j] = Math.min(dp[i][j], Math.max(dp[i-1][s-1], dp[i][j-s])+1);
-                }
-            }
-        }
-        return dp[k][n];
-    }
+        // constructor of hierarchy
+//        ChildClass child = new ChildClass();
 
+        // List related test
+/*        ListSolution s = new ListSolution();
+        ListNode head = s.buildList(new int[]{4, 2, 1, 3});
+        s.insertionSortList(head);*/
+    }
 
 }
